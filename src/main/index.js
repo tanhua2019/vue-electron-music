@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow,ipcMain } from 'electron'
 import express from 'express'
 import routes from './routes'
 
@@ -49,9 +49,10 @@ function createWindow() {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    height: 563,
+    height: 800,
     useContentSize: true,
-    width: 1000
+    width: 2400,
+    frame: false,
   })
 
   mainWindow.loadURL(winURL)
@@ -73,6 +74,14 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()
   }
+})
+
+ipcMain.on('clickMin', () => {
+  mainWindow.minimize();
+})
+
+ipcMain.on('clickClose', () => {
+  mainWindow.close()
 })
 
 /**
