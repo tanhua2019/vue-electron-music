@@ -5,7 +5,12 @@ import router from './router'
 import store from './store'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import './assets/styles/public.scss'
+import filter from './filter'
 
+Object.keys(filter).filter(k => {
+  Vue.filter(k, filter[k])
+})
 Vue.use(ElementUI);
 Vue.use(require('vue-electron'))
 

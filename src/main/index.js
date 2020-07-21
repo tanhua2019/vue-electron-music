@@ -22,7 +22,6 @@ function createWindow() {
   app.all("*", function (req, res, next) {
     if (req.path !== "/" && !req.path.includes(".")) {
       res.header("Access-Control-Allow-Credentials", true);
-      // 这里获取 origin 请求头 而不是用 *
       res.header("Access-Control-Allow-Origin", req.headers["origin"] || "*");
       res.header("Access-Control-Allow-Headers", "X-Requested-With");
       res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
@@ -82,6 +81,10 @@ ipcMain.on('clickMin', () => {
 
 ipcMain.on('clickClose', () => {
   mainWindow.close()
+})
+
+ipcMain.on('clickMax', () => {
+  mainWindow.isMaximized() ? mainWindow.unmaximize() : mainWindow.maximize()
 })
 
 /**
